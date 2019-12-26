@@ -20,9 +20,9 @@ with g.as_default() as graph:
         W = tf.Variable(tf.random_normal([1]), name='weight')
         b = tf.Variable(tf.zeros([1]), name='bias')
     with tf.name_scope('prediction'):
-        hypothesis = W * x + b
+        hypothesis = tf.squeeze(W * x + b)
     with tf.name_scope('loss'):
-        loss = tf.reduce_mean(tf.square(y - tf.squeeze(hypothesis)))
+        loss = tf.reduce_mean(tf.square(y - hypothesis))
     with tf.name_scope('optimizer'):
         optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
         train = optimizer.minimize(loss)
