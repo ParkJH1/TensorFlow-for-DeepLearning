@@ -1,10 +1,10 @@
 import tensorflow as tf_new
 import numpy as np
 import matplotlib.pyplot as plt
-
 tf = tf_new.compat.v1
 tf.set_random_seed(777)
 
+# 데이터 N개 랜덤생성
 N = 100
 a = 5
 b = 2
@@ -18,7 +18,7 @@ with g.as_default() as graph:
     y = tf.placeholder(tf.float32)
     W = tf.Variable(tf.random_normal([1]), name='weight')
     b = tf.Variable(tf.zeros([1]), name='bias')
-    hypothesis = W * x + b
+    hypothesis = tf.squeeze(W * x + b)
     loss = tf.reduce_mean(tf.square(y - hypothesis))
     optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
     train = optimizer.minimize(loss)
