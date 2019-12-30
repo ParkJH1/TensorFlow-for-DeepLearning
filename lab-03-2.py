@@ -19,11 +19,12 @@ with g.as_default() as graph:
         W2 = tf.Variable(tf.random_normal([2, 1]), name='weight2')
         b2 = tf.Variable(tf.zeros([1]), name='bias2')
     with tf.name_scope('prediction'):
-        L1 = tf.sigmoid(tf.matmul(x, W1) + b1)
-        y_logit = tf.matmul(L1, W2) + b2
-        hypothesis = tf.sigmoid(y_logit)
+        L1 = tf.matmul(x, W1) + b1
+        L1 = tf.sigmoid(L1)
+        L2 = tf.matmul(L1, W2) + b2
+        hypothesis = tf.sigmoid(L2)
     with tf.name_scope('loss'):
-        entropy = tf.nn.sigmoid_cross_entropy_with_logits(logits=y_logit, labels=y)
+        entropy = tf.nn.sigmoid_cross_entropy_with_logits(logits=L2, labels=y)
         loss = tf.reduce_sum(entropy)
     with tf.name_scope('optimizer'):
         optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
