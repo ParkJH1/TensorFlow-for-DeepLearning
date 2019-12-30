@@ -30,7 +30,7 @@ def mnist_load(num_images=100):
         bytestream.read(16)
         buf = bytestream.read(28 * 28 * num_images)
         images = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
-        images = images.reshape(-1, 28, 28)
+        images = images.reshape(-1, 28 * 28)
         print('Successfully Extracted', filenames[0])
 
     print('Extracting...', filenames[1])
@@ -38,7 +38,7 @@ def mnist_load(num_images=100):
         size = os.stat(filepaths[1]).st_size
         bytestream.read(8)
         buf = bytestream.read(num_images)
-        labels = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
+        labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int32)
         print('Successfully Extracted', filenames[1])
 
     return images, labels
@@ -50,7 +50,8 @@ print(y_data)
 
 for i in range(9):
     plt.subplot(3, 3, i + 1)
-    plt.imshow(x_data[i], cmap='gray')
+    img = x_data[i].reshape(28, 28)
+    plt.imshow(img, cmap='gray')
     plt.title(str(int(y_data[i])))
     plt.xticks([])
     plt.yticks([])
