@@ -11,6 +11,10 @@ tf.set_random_seed(777)
 
 
 def mnist_load(num_images=100):
+    if num_images > 60000:
+        num_images = 60000
+    elif num_images < 1:
+        num_images = 1
     filenames = ['train-images-idx3-ubyte.gz', 'train-labels-idx1-ubyte.gz', 't10k-images-idx3-ubyte.gz', 't10k-labels-idx1-ubyte.gz']
     filepaths = []
     for filename in filenames:
