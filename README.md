@@ -32,3 +32,26 @@
 >>> pip install -r requirements.txt
 ```
 
+
+
+3. conda 환경 삭제
+
+```
+>>> conda env remove -n python-env
+```
+
+
+
+4. conda 환경 목록
+
+```
+>>> conda env list
+```
+
+
+
+5. conda 환경 비활성화
+
+```
+>>> conda deactivate
+```
