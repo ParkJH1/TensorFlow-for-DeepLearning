@@ -16,6 +16,8 @@ x_test = x_test.reshape(10000, 784).astype(np.float32) / 255
 y_train = y_train.astype(np.float32)
 y_test = y_test.astype(np.float32)
 
+print(x_train)
+
 # Reserve 10,000 samples for validation
 x_val = x_train[-10000:]
 y_val = y_train[-10000:]
