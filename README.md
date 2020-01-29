@@ -5,7 +5,7 @@
   - python 3.6
   - numpy 1.17.3
   - matplotlib 3.1.1
-  - tensorflow 2.0.0
+  - tensorflow 2.0.1
 
 [Python 환경 구축 가이드](https://github.com/ParkJH1/Python-Tutorial/blob/master/README.md)
 
