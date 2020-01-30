@@ -85,7 +85,7 @@ with g.as_default() as graph:
     optimizer = tf.train.AdamOptimizer(learning_rate=0.005)
     train = optimizer.minimize(loss)
 
-    n_steps = 1000
+    n_steps = 200
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         for i in range(n_steps):
@@ -93,8 +93,13 @@ with g.as_default() as graph:
             if i % 100 == 0:
                 print('step %d, loss: %f' % (i, l))
 
-        pred_y = sess.run(tf.round(hypothesis), feed_dict={x: x_data})
+        print(sess.run(hypothesis, feed_dict={x: x_data}))
+        pred_y = sess.run(tf.arg_max(hypothesis, 1), feed_dict={x: x_data})
         print(pred_y)
+
+        # correct_prediction = tf.equal(tf.arg_max(pred_y, 1), tf.arg_max(y_data, 1))
+        # accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
+        # print("accuracy %s%%" % (sess.run(accuracy, feed_dict={x: x_data, y: y_data}) * 100))
 
         # correct_prediction = tf.equal(pred_y, y_data)
         # accuracy = tf.reduce_mean(tf.cast(correct_prediction, "float"))
