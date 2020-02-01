@@ -49,7 +49,7 @@ def mnist_load(num_images=100):
     return images, labels
 
 
-x_data, y_data = mnist_load(9)
+x_data, y_data = mnist_load(9000)
 
 g = tf.Graph()
 with g.as_default() as graph:
@@ -78,9 +78,10 @@ with g.as_default() as graph:
 
     W4 = tf.Variable(tf.truncated_normal([512, 10]))
     b4 = tf.Variable(tf.zeros([10]))
-    hypothesis = tf.matmul(L3, W4) + b4
+    L4 = tf.matmul(L3, W4) + b4
+    hypothesis = tf.nn.softmax(L4)
 
-    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=hypothesis))
+    loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=L4))
 
     optimizer = tf.train.AdamOptimizer(learning_rate=0.005)
     train = optimizer.minimize(loss)
@@ -93,7 +94,7 @@ with g.as_default() as graph:
             if i % 100 == 0:
                 print('step %d, loss: %f' % (i, l))
 
-        print(sess.run(hypothesis, feed_dict={x: x_data}))
+        # print(sess.run(hypothesis, feed_dict={x: x_data}))
         pred_y = sess.run(tf.arg_max(hypothesis, 1), feed_dict={x: x_data})
         print(pred_y)
 
