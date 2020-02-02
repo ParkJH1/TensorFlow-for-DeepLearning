@@ -9,6 +9,8 @@ model = keras.Sequential()
 model.add(keras.Input(shape=(2,)))
 model.add(keras.layers.Dense(2, activation=keras.activations.sigmoid))
 model.add(keras.layers.Dense(1, activation=keras.activations.sigmoid))
+model.summary()
+
 model.compile(optimizer=keras.optimizers.SGD(0.1),
               loss=keras.losses.binary_crossentropy,
               metrics=[keras.losses.binary_crossentropy])
