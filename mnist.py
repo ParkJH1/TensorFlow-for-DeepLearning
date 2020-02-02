@@ -44,6 +44,8 @@ def load(num_images=100, option=False):
         labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int32)
         if option:
             labels = np.eye[10](labels)
+        else:
+            labels = np.reshape(labels, [-1, 1])
         print('Successfully Extracted', filenames[1])
 
     return images, labels
