@@ -17,9 +17,9 @@ model.summary()
 
 model.compile(optimizer=keras.optimizers.SGD(0.01),
               loss=keras.losses.mean_squared_error,
-              metrics=[keras.losses.mean_squared_error])
+              metrics=[])
 
-history = model.fit(x_data, y_data, batch_size=N, epochs=1000)
+history = model.fit(x_data, y_data, batch_size=N, epochs=5000)
 print(history.history)
 
 pred_y = model.predict(x_data)

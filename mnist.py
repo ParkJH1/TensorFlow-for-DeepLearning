@@ -33,7 +33,7 @@ def load(num_images=100, dimension=1):
         if dimension == 1:
             images = images.reshape(-1, 784)
         else:
-            images = images.reshape(-1, 28 * 28)
+            images = images.reshape(-1, 28, 28, 1)
         print('Successfully Extracted', filenames[0])
 
     print('Extracting...', filenames[1])
