@@ -6,19 +6,25 @@ tf = tf_new.compat.v1
 tf.set_random_seed(777)
 
 x_data = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-y_data = np.array([[0], [0], [0], [1]])
+y_data = np.array([[0], [1], [1], [0]])
 
 g = tf.Graph()
 with g.as_default() as graph:
     x = tf.placeholder(tf.float32, [None, 2])
     y = tf.placeholder(tf.float32, [None, 1])
-    W = tf.Variable(tf.random_normal([2, 1]), name='weight')
-    b = tf.Variable(tf.zeros([1]), name='bias')
-    y_logit = tf.matmul(x, W) + b
-    hypothesis = tf.sigmoid(y_logit)
-    entropy = tf.nn.sigmoid_cross_entropy_with_logits(logits=y_logit, labels=y)
+    W1 = tf.Variable(tf.random_normal([2, 2]))
+    b1 = tf.Variable(tf.zeros([2]))
+    L1 = tf.sigmoid(tf.matmul(x, W1) + b1)
+
+    W2 = tf.Variable(tf.random_normal([2, 1]))
+    b2 = tf.Variable(tf.zeros([1]))
+    L2 = tf.matmul(L1, W2) + b2
+
+    hypothesis = tf.sigmoid(L2)
+
+    entropy = tf.nn.sigmoid_cross_entropy_with_logits(logits=L2, labels=y)
     loss = tf.reduce_sum(entropy)
-    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01)
+    optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.05)
     train = optimizer.minimize(loss)
 
     n_steps = 10000
