@@ -20,9 +20,7 @@ model.compile(optimizer=tf.keras.optimizers.RMSprop(0.005),
 
 N = 10
 x_data, y_data, _ = mnist.load(N, dimension=2)
-print(x_data.shape)
 x_data = np.pad(x_data, pad_width=((0, 0), (2, 2), (2, 2), (0, 0)), mode='constant', constant_values=(0))
-print(x_data.shape)
 
 history = model.fit(x_data, y_data, batch_size=N, epochs=1000)
 
