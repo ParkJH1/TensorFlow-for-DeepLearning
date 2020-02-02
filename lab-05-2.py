@@ -21,7 +21,7 @@ model.summary()
 
 model.compile(optimizer=keras.optimizers.SGD(0.01),
               loss=keras.losses.binary_crossentropy,
-              metrics=[keras.losses.binary_crossentropy])
+              metrics=[])
 
 history = model.fit(x_data, y_data, batch_size=N, epochs=1000)
 print(history.history)
