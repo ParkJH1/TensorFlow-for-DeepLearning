@@ -10,7 +10,7 @@ tf = tf_new.compat.v1
 tf.set_random_seed(777)
 
 
-def load(num_images=100, dimension=1, onehot=False):
+def load(num_images=100, dimension=1):
     filenames = ['train-images-idx3-ubyte.gz', 'train-labels-idx1-ubyte.gz', 't10k-images-idx3-ubyte.gz', 't10k-labels-idx1-ubyte.gz']
     filepaths = []
     for filename in filenames:
@@ -42,17 +42,15 @@ def load(num_images=100, dimension=1, onehot=False):
         bytestream.read(8)
         buf = bytestream.read(num_images)
         labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int32)
-        if onehot:
-            labels = np.eye[10](labels)
-        else:
-            labels = np.reshape(labels, [-1, 1])
+        onehot = np.eye(10)[labels]
+        labels = np.reshape(labels, [-1, 1])
         print('Successfully Extracted', filenames[1])
 
-    return images, labels
+    return images, labels, onehot
 
 
 if __name__ == '__main__':
-    x_data, y_data = load(9)
+    x_data, y_data, _ = load(9)
     print(x_data)
     print(y_data)
 
