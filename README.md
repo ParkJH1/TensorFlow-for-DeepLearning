@@ -13,16 +13,23 @@
 
 ## 환경 설정
 
-1. conda 환경 생성 및 활성화
+1. conda 환경 생성
 
 ```
 >>> conda create -n python-env python=3.6
+```
+
+
+
+2. conda 환경 활성화
+
+```
 >>> conda activate python-env
 ```
 
 
 
-2. conda 환경 목록
+3. conda 환경 목록
 
 ```
 >>> conda env list
@@ -30,7 +37,7 @@
 
 
 
-3. python 모듈 설치
+4. python 모듈 설치
 
 ```
 >>> pip install -r requirements.txt
