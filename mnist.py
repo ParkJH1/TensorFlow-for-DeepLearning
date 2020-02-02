@@ -10,7 +10,7 @@ tf = tf_new.compat.v1
 tf.set_random_seed(777)
 
 
-def mnist_load(num_images=100):
+def load(num_images=100, option=False):
     filenames = ['train-images-idx3-ubyte.gz', 'train-labels-idx1-ubyte.gz', 't10k-images-idx3-ubyte.gz', 't10k-labels-idx1-ubyte.gz']
     filepaths = []
     for filename in filenames:
@@ -30,7 +30,10 @@ def mnist_load(num_images=100):
         bytestream.read(16)
         buf = bytestream.read(28 * 28 * num_images)
         images = np.frombuffer(buf, dtype=np.uint8).astype(np.float32)
-        images = images.reshape(-1, 28 * 28)
+        if option:
+            images = images.reshape(-1, 28 * 28)
+        else:
+            images = images.reshape(-1, 784)
         print('Successfully Extracted', filenames[0])
 
     print('Extracting...', filenames[1])
@@ -39,21 +42,24 @@ def mnist_load(num_images=100):
         bytestream.read(8)
         buf = bytestream.read(num_images)
         labels = np.frombuffer(buf, dtype=np.uint8).astype(np.int32)
+        if option:
+            labels = np.eye[10](labels)
         print('Successfully Extracted', filenames[1])
 
     return images, labels
 
 
-x_data, y_data = mnist_load(9)
-print(x_data)
-print(y_data)
+if __name__ == '__main__':
+    x_data, y_data = load(9)
+    print(x_data)
+    print(y_data)
 
-for i in range(9):
-    plt.subplot(3, 3, i + 1)
-    img = x_data[i].reshape(28, 28)
-    plt.imshow(img, cmap='gray')
-    plt.title(str(int(y_data[i])))
-    plt.xticks([])
-    plt.yticks([])
+    for i in range(9):
+        plt.subplot(3, 3, i + 1)
+        img = x_data[i].reshape(28, 28)
+        plt.imshow(img, cmap='gray')
+        plt.title(str(int(y_data[i])))
+        plt.xticks([])
+        plt.yticks([])
 
-plt.show()
+    plt.show()
