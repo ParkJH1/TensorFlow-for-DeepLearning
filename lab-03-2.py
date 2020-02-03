@@ -6,7 +6,7 @@ import mnist
 tf = tf_new.compat.v1
 tf.set_random_seed(777)
 
-x_data, y_data = mnist.load(9)
+x_data, y_data, _ = mnist.load(9)
 
 g = tf.Graph()
 with g.as_default() as graph:
