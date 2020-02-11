@@ -14,7 +14,6 @@ model.compile(optimizer=tf.keras.optimizers.RMSprop(0.001),
 
 N = 10
 x_data, y_data, _ = mnist.load(N, dimension=2)
-print(x_data.shape)
 x_data = np.reshape(x_data, [-1, 28, 28])
 
 history = model.fit(x_data, y_data, batch_size=N, epochs=1000)
