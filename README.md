@@ -29,10 +29,9 @@
 
 
 
-3. conda 환경 목록
-
+3. 프로젝트 경로로 이동
 ```
->>> conda env list
+>>> cd (프로젝트 경로)
 ```
 
 
@@ -42,4 +41,3 @@
 ```
 >>> pip install -r requirements.txt
 ```
-
